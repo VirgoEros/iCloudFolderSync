@@ -11,7 +11,7 @@ on run
 	try
 		tell application "Finder"
 			set {button returned:iCloudMode} to ¬
-				display dialog {"請鰛鰇鱮美鱺沝療癒鯀女鰰選擇 iCloudDrive 鮦步選項 唷💋"} buttons ¬
+				display dialog {"請鰛鰇鱮美鱺沝療癒鯀女鰰選擇鱫鰰iCloudDrive文件夾鮦步唷💋"} buttons ¬
 					{"將沝女鰰選擇的文件夾鮦步至iCloudDrive", "開啟腳本", "退出"} with title ¬
 					{"鱫鰰iCloudDrive文件夾鮦步"}
 			
@@ -20,13 +20,13 @@ on run
 			
 			if iCloudMode is "將沝女鰰選擇的文件夾鮦步至iCloudDrive" then
 				set {button returned:iCloudSyncMode} to ¬
-					display dialog {"請鰛鰇鱮美鱺沝療癒鯀女鰰選擇使用者鮦步至iCloudDrive選項 唷💋"} buttons ¬
+					display dialog {"請鰛鰇鱮美鱺沝療癒鯀女鰰選擇鱫鰰iCloudDrive文件夾鮦步選項 唷💋"} buttons ¬
 						{"鱓次鮦步", "實鰣鮦步"} with title ¬
 						{"鱫鰰iCloudDrive文件夾鮦步"}
 				
 				if iCloudSyncMode is "鱓次鮦步" then
 					set SyncSource to ¬
-						(choose folder with prompt "請沝療癒鯀女鰰選擇欲同步之來源資料夾 唷💋" default location (path to (users folder)))
+						(choose folder with prompt "請沝療癒鯀女鰰選擇欲同步之來源文件夾 唷💋" default location (path to (users folder)))
 					
 					set SyncSourceName to (SyncSource's name as string)
 					set SyncSourceName to quoted form of SyncSourceName
@@ -72,7 +72,7 @@ on run
 				end if
 				if iCloudSyncMode is "實鰣鮦步" then
 					set SyncSource to ¬
-						(choose folder with prompt "請沝療癒鯀女鰰選擇欲同步之來源資料夾 唷💋" default location (path to (users folder)))
+						(choose folder with prompt "請沝療癒鯀女鰰選擇欲同步之來源文件夾 唷💋" default location (path to (users folder)))
 					
 					set SyncSourceName to (SyncSource's name as string)
 					set SyncSourceName to quoted form of SyncSourceName
