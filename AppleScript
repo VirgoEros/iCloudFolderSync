@@ -3,8 +3,8 @@ bit.ly/下載_鱫鰰iCloudDrive文件夾鮦步
 GitHub.com/VirgoEros/iCloudFolderSync/blob/master/AppleScript 
 *)
 ------------------------------∞ 鱫鰰iCloudDrive文件夾鮦步 ∞----------------------------------ON.  
-global iCloudMode, OpenScript, iCloudSyncMode, SyncSource, SyncSourceName, mk, SyncDest, rsyncPath, rsyncParameter, TerminalNotifier, isDone, itemPath, itemProgress, iCloudSyncMode, firstRun, RT_Seconds, RT_Option, RT_Option_HDW, errmsg, errnbr
-global iCloudSyncMode, SyncSource, SyncSourceName, mk, SyncDest, rsyncPath, rsyncParameter, firstRun, RT_Seconds, rsyncPath, rsyncParameter, SyncSource, SyncDest, RT_Option, RT_Option_HDW, errmsg, errnbr
+global iCloudMode, OpenScript, iCloudSyncMode, SyncSource, SyncSourceName, SyncDest, rsyncPath, rsyncParameter, TerminalNotifier, isDone, itemPath, itemProgress, iCloudSyncMode, firstRun, RT_Seconds, RT_Option, RT_Option_HDW, errmsg, errnbr
+global iCloudSyncMode, SyncSource, SyncSourceName, SyncDest, rsyncPath, rsyncParameter, firstRun, RT_Seconds, rsyncPath, rsyncParameter, SyncSource, SyncDest, RT_Option, RT_Option_HDW, errmsg, errnbr
 global OpenScript, OpenAppScript, TerminalNotifier, errmsg, errnbr
 
 on run
@@ -30,7 +30,7 @@ on run
 					
 					set SyncSourceName to (SyncSource's name as string)
 					set SyncSourceName to quoted form of SyncSourceName
-					set mk to ("cd ~/Library/'Mobile Documents'/com~apple~CloudDocs ;mkdir -p " & SyncSourceName)
+					do shell script ("cd ~/Library/'Mobile Documents'/com~apple~CloudDocs ;mkdir -p " & SyncSourceName)
 					set SyncDest to ("~/Library/'Mobile Documents'/com~apple~CloudDocs/" & SyncSourceName)
 					
 					
@@ -76,7 +76,7 @@ on run
 					
 					set SyncSourceName to (SyncSource's name as string)
 					set SyncSourceName to quoted form of SyncSourceName
-					set mk to ("cd ~/Library/'Mobile Documents'/com~apple~CloudDocs ;mkdir -p " & SyncSourceName)
+					do shell script ("cd ~/Library/'Mobile Documents'/com~apple~CloudDocs ;mkdir -p " & SyncSourceName)
 					set SyncDest to ("~/Library/'Mobile Documents'/com~apple~CloudDocs/" & SyncSourceName)
 					
 					
