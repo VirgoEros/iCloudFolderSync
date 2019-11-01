@@ -1,0 +1,164 @@
+(* 
+bit.ly/下載_鱫鰰iCloudDrive文件夾鮦步 
+GitHub.com/VirgoEros/iCloudFolderSync/blob/master/AppleScript 
+*)
+------------------------------∞ 鱫鰰iCloudDrive文件夾鮦步 ∞----------------------------------ON.  
+global iCloudMode, OpenScript, iCloudSyncMode, SyncSource, SyncSourceName, mk, SyncDest, rsyncPath, rsyncParameter, TerminalNotifier, isDone, itemPath, itemProgress, iCloudSyncMode, firstRun, RT_Seconds, RT_Option, RT_Option_HDW, errmsg, errnbr
+global iCloudSyncMode, firstRun, RT_Seconds, rsyncPath, rsyncParameter, SyncSource, SyncDest, RT_Option, RT_Option_HDW, errmsg, errnbr
+global OpenScript, OpenAppScript, TerminalNotifier, errmsg, errnbr
+
+on run
+	try
+		tell application "Finder"
+			set {button returned:iCloudMode} to ¬
+				display dialog {"請鰛鰇鱮美鱺沝療癒鯀女鰰選擇 iCloudDrive 鮦步選項 唷💋"} buttons ¬
+					{"將沝女鰰選擇的文件夾鮦步至iCloudDrive", "開啟腳本", "退出"} with title ¬
+					{"鱫鰰iCloudDrive文件夾鮦步"}
+			
+			if iCloudMode is "開啟腳本" then run script OpenScript
+			if iCloudMode is "退出" then continue quit
+			
+			if iCloudMode is "將沝女鰰選擇的文件夾鮦步至iCloudDrive" then
+				set {button returned:iCloudSyncMode} to ¬
+					display dialog {"請鰛鰇鱮美鱺沝療癒鯀女鰰選擇使用者鮦步至iCloudDrive選項 唷💋"} buttons ¬
+						{"鱓次鮦步", "實鰣鮦步"} with title ¬
+						{"鱫鰰iCloudDrive文件夾鮦步"}
+				
+				if iCloudSyncMode is "鱓次鮦步" then
+					set SyncSource to ¬
+						(choose folder with prompt "請沝療癒鯀女鰰選擇欲同步之來源資料夾 唷💋" default location (path to (users folder)))
+					
+					set SyncSourceName to (SyncSource's name as string)
+					set SyncSourceName to quoted form of SyncSourceName
+					set mk to ("cd ~/Library/'Mobile Documents'/com~apple~CloudDocs ;mkdir -p " & SyncSourceName)
+					set SyncDest to ("~/Library/'Mobile Documents'/com~apple~CloudDocs/" & SyncSourceName)
+					
+					
+					set SyncSource to quoted form of POSIX path of SyncSource
+					
+					set rsyncPath to POSIX path of (path to me as text) & ("Contents/MacOS/rsync")
+					set rsyncPath to quoted form of rsyncPath
+					
+					set rsyncParameter to (" -ESWPaudvxh80AX --delete --stats --exclude={.*,} ")
+					
+					set TerminalNotifier to POSIX path of (path to me as text) ¬
+						& {"Contents/MacOS/terminal-notifier"}
+					set TerminalNotifier to quoted form of TerminalNotifier
+					do shell script (TerminalNotifier & " -title iCloudDrive鮦步中唷💋")
+					
+					do shell script (rsyncPath & rsyncParameter & SyncSource & space & SyncDest)
+					
+					delay 1
+					set isDone to false
+					set itemPath to ("rsync ")
+					set itemProgress to "ps ax | grep -v grep | grep " & itemPath
+					repeat while isDone is false
+						try
+							do shell script itemProgress
+							if the result contains itemPath then
+								delay 1
+							else
+								set isDone to true
+							end if
+						on error
+							set isDone to true
+						end try
+					end repeat
+					if isDone is true then
+						do shell script (TerminalNotifier & " -title iCloudDrive鮦步鯇成鰳唷💋")
+						do shell script ("open " & SyncDest)
+						continue quit
+					end if
+				end if
+				if iCloudSyncMode is "實鰣鮦步" then
+					set SyncSource to ¬
+						(choose folder with prompt "請沝療癒鯀女鰰選擇欲同步之來源資料夾 唷💋" default location (path to (users folder)))
+					
+					set SyncSourceName to (SyncSource's name as string)
+					set SyncSourceName to quoted form of SyncSourceName
+					set mk to ("cd ~/Library/'Mobile Documents'/com~apple~CloudDocs ;mkdir -p " & SyncSourceName)
+					set SyncDest to ("~/Library/'Mobile Documents'/com~apple~CloudDocs/" & SyncSourceName)
+					
+					
+					set SyncSource to quoted form of POSIX path of SyncSource
+					
+					set rsyncPath to POSIX path of (path to me as text) & ("Contents/MacOS/rsync")
+					set rsyncPath to quoted form of rsyncPath
+					
+					set rsyncParameter to (" -ESWPaudvxh80AX --delete --stats --exclude={.*,} ")
+					set firstRun to true
+					set RT_Seconds to ("")
+					set {button returned:RT_Option} to ¬
+						display dialog {" 
+請鰛鰇鱮美鱺沝療癒鯀女鰰選擇 鮦步間隔鱓位 唷💋"} buttons ¬
+							{"秒", "魵", "鰣 日 週"} with title ¬
+							{"鱫鰰iCloudDrive文件夾鮦步"}
+					
+					if RT_Option is "秒" then return RT_Seconds
+					if RT_Option is "魵" then return {RT_Seconds * minutes}
+					
+					if RT_Option is "鰣 日 週" then
+						set {button returned:RT_Option_HDW} to ¬
+							display dialog {" 
+請鰛鰇鱮美鱺沝療癒鯀女鰰選擇 鮦步間隔鱓位 唷💋"} buttons ¬
+								{"鰣", "日", "週"} with title ¬
+								{"鱫鰰iCloudDrive文件夾鮦步"}
+						
+						if RT_Option_HDW is "鰣" then return {RT_Seconds * hours}
+						if RT_Option_HDW is "日" then return {RT_Seconds * days}
+						if RT_Option_HDW is "週" then return {RT_Seconds * weeks}
+						
+					end if
+				end if
+			end if
+		end tell
+	on error errmsg number errnbr
+		if errnbr = -128 then continue quit
+		continue quit
+	end try
+end run
+
+on idle
+	try
+		if iCloudSyncMode is "實鰣鮦步" then
+			if firstRun then
+				tell application "Finder" to display dialog {"請沝女鰰鰎魞間隔數字，倘鰙鰡空鱂以最小間隔值鮦步唷💋"} default answer ("") with title ¬
+					{"鱫鰰iCloudDrive文件夾鮦步"}
+				set RT_Seconds to ((text returned of the result) as integer)
+				if RT_Seconds is "" then return continue quit
+				set firstRun to false
+			else
+				try
+					do shell script (rsyncPath & rsyncParameter & SyncSource & space & SyncDest)
+				end try
+			end if
+			if firstRun is "" then return seconds
+			if RT_Option is "秒" then return RT_Seconds
+			if RT_Option is "魵" then return {RT_Seconds * minutes}
+			if RT_Option_HDW is "鰣" then return {RT_Seconds * hours}
+			if RT_Option_HDW is "日" then return {RT_Seconds * days}
+			if RT_Option_HDW is "週" then return {RT_Seconds * weeks}
+		end if
+	on error errmsg number errnbr
+		if errnbr = -128 then continue quit
+	end try
+end idle
+------------------------ 開啟腳本 ------------------------ON. 
+script OpenScript
+	try
+		set OpenAppScript to POSIX path of (path to me as text) & ("Contents/Resources/Scripts/main.scpt")
+		set OpenAppScript to quoted form of OpenAppScript
+		do shell script ("open " & OpenAppScript)
+		set TerminalNotifier to POSIX path of (path to me as text) & ("Contents/MacOS/terminal-notifier")
+		set TerminalNotifier to quoted form of TerminalNotifier
+		do shell script (TerminalNotifier & " -title iCloudDrive腳本已開啟鰳唷💋")
+		continue quit
+	on error errmsg number errnbr
+		if errnbr = -128 then continue quit
+		continue quit
+	end try
+end script
+------------------------------∞ 鱫鰰iCloudDrive文件夾鮦步 ∞--------------------------------END. 
+
+
+-- 
