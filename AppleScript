@@ -11,7 +11,7 @@ on run
 	try
 		tell application "Finder"
 			set {button returned:iCloudMode} to ¬
-				display dialog {"請鰛鰇鱮美鱺沝療癒鯀女鰰選擇鱫鰰iCloudDrive文件夾鮦步唷💋"} buttons ¬
+				display dialog {"請鰛鰇鱮美鱺沝療癒鯀女鰰選擇鱫鰰iCloudDrive文件夾鮦步選項唷💋"} buttons ¬
 					{"將沝女鰰選擇的文件夾鮦步至iCloudDrive", "開啟腳本", "退出"} with title ¬
 					{"鱫鰰iCloudDrive文件夾鮦步"}
 			
@@ -32,7 +32,6 @@ on run
 					set SyncSourceName to quoted form of SyncSourceName
 					do shell script ("cd ~/Library/'Mobile Documents'/com~apple~CloudDocs ;mkdir -p " & SyncSourceName)
 					set SyncDest to ("~/Library/'Mobile Documents'/com~apple~CloudDocs/" & SyncSourceName)
-					
 					
 					set SyncSource to quoted form of POSIX path of SyncSource
 					
@@ -78,7 +77,6 @@ on run
 					set SyncSourceName to quoted form of SyncSourceName
 					do shell script ("cd ~/Library/'Mobile Documents'/com~apple~CloudDocs ;mkdir -p " & SyncSourceName)
 					set SyncDest to ("~/Library/'Mobile Documents'/com~apple~CloudDocs/" & SyncSourceName)
-					
 					
 					set SyncSource to quoted form of POSIX path of SyncSource
 					
